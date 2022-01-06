@@ -7,5 +7,6 @@ export default defineConfig({
 	shortcuts: {
 		row: 'flex flex-row',
 		column: 'flex flex-column',
+		center: 'items-center justify-center',
 	},
 });

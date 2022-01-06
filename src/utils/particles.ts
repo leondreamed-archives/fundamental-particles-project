@@ -1,7 +1,18 @@
-import { ParticleInformation, ParticleName } from '~/types/particles';
+import mapObject from 'map-obj';
+import type { ParticleInformation, ParticleName } from '~/types/particles';
 
-const defineParticles = <P extends Record<string, ParticleInformation>>(p: P) =>
-	p;
+const defineParticles = <
+	T extends string,
+	P extends Record<string, Omit<ParticleInformation, 'type'>>
+>(
+	type: T,
+	particles: P
+): { [K in keyof P]: P[K] & { type: T } } =>
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+	mapObject(particles, (name, particleInfo) => [
+		name as string,
+		{ ...particleInfo, type },
+	]) as any;
 
 type ParticleMassStringOptions = {
 	mass: number;
@@ -27,7 +38,7 @@ const particleMassString = ({
 };
 
 const m = particleMassString;
-export const quarks = defineParticles({
+export const quarks = defineParticles('quark', {
 	up: {
 		charge: '2/3',
 		spin: '1/2',
@@ -60,7 +71,7 @@ export const quarks = defineParticles({
 	},
 });
 
-export const leptons = defineParticles({
+export const leptons = defineParticles('lepton', {
 	electron: {
 		mass: m({ mass: 0.511, unit: 'MeV' }),
 		charge: '-1',
@@ -93,7 +104,7 @@ export const leptons = defineParticles({
 	},
 });
 
-export const bosons = defineParticles({
+export const bosons = defineParticles('boson', {
 	gluon: {
 		mass: '0',
 		charge: '0',
@@ -121,12 +132,32 @@ export const bosons = defineParticles({
 	},
 });
 
-export const fundamentalParticleInformation = {
+export const particlesInformation = {
 	...quarks,
 	...leptons,
 	...bosons,
 } as const;
 
 export const fundamentalParticles = Object.keys(
-	fundamentalParticleInformation
+	particlesInformation
 ) as ParticleName[];
+
+export const particlesToHtml: Record<ParticleName, string> = {
+	up: 'u',
+	down: 'd',
+	charm: 'c',
+	strange: 's',
+	top: 't',
+	bottom: 'b',
+	electron: 'e',
+	electronNeutrino: '<i>v</i><sub>e</sub>',
+	muon: 'µ',
+	muonNeutrino: '<i>v</i><sub>µ</sub>',
+	tau: 'τ',
+	tauNeutrino: '<i>v</i><sub>τ</sub>',
+	gluon: 'g',
+	photon: 'γ',
+	zBoson: 'Z',
+	wBoson: 'W',
+	higgsBoson: 'H',
+};

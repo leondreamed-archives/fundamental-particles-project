@@ -8,12 +8,14 @@ specifiers:
   '@leonzalion/prettier-config': latest
   '@leonzalion/tsconfig': latest
   '@types/jest': ^27.0.3
+  '@types/mathjax': ^0.0.37
   '@types/node': ^17.0.0
   '@vitejs/plugin-vue': ^2.0.0
   eslint: ^8.5.0
   execa: ^6.0.0
   jest: ^27.4.5
   lint-staged: ^12.1.3
+  map-obj: ^5.0.0
   pinia: ^2.0.0-rc.10
   prettier: ^2.5.1
   rimraf: ^3.0.2
@@ -30,6 +32,7 @@ specifiers:
   windicss: ^3.4.2
 
 dependencies:
+  map-obj: 5.0.0
   pinia: 2.0.0-rc.10_typescript@4.5.4+vue@3.2.26
   vue: 3.2.26
 
@@ -41,6 +44,7 @@ devDependencies:
   '@leonzalion/prettier-config': 1.0.2_prettier@2.5.1
   '@leonzalion/tsconfig': 1.0.10_faf01e1d5a40372a98081522dcafc186
   '@types/jest': 27.4.0
+  '@types/mathjax': 0.0.37
   '@types/node': 17.0.8
   '@vitejs/plugin-vue': 2.0.1_vite@2.7.10+vue@3.2.26
   eslint: 8.6.0
@@ -1026,6 +1030,10 @@ packages:
 
   /@types/json5/0.0.29:
     resolution: {integrity: sha1-7ihweulOEdK4J7y+UnC86n8+ce4=}
+    dev: true
+
+  /@types/mathjax/0.0.37:
+    resolution: {integrity: sha512-y0WSZBtBNQwcYipTU/BhgeFu1EZNlFvUNCmkMXV9kBQZq7/o5z82dNVyH3yy2Xv5zzeNeQoHSL4Xm06+EQiH+g==}
     dev: true
 
   /@types/minimist/1.2.2:
@@ -4615,6 +4623,11 @@ packages:
     resolution: {integrity: sha512-hdN1wVrZbb29eBGiGjJbeP8JbKjq1urkHJ/LIP/NY48MZ1QVXUsQBV1G1zvYFHn1XE06cwjBsOI2K3Ulnj1YXQ==}
     engines: {node: '>=8'}
     dev: true
+
+  /map-obj/5.0.0:
+    resolution: {integrity: sha512-2L3MIgJynYrZ3TYMriLDLWocz15okFakV6J12HXvMXDHui2x/zgChzg1u9mFFGbbGWE+GsLpQByt4POb9Or+uA==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+    dev: false
 
   /memory-fs/0.2.0:
     resolution: {integrity: sha1-8rslNovBIeORwlIN6Slpyu4KApA=}

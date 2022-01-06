@@ -9,5 +9,3 @@ import ParticleGrid from './components/particle-grid.vue';
 		<ParticleGrid />
 	</div>
 </template>
-
-<style></style>
