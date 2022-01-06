@@ -4,4 +4,8 @@ export default defineConfig({
 	attributify: {
 		prefix: 'w:',
 	},
+	shortcuts: {
+		row: 'flex flex-row',
+		column: 'flex flex-column',
+	},
 });

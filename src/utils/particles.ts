@@ -1,4 +1,4 @@
-import { ParticleInformation } from '~/types/particles.js';
+import { ParticleInformation, ParticleName } from '~/types/particles';
 
 const defineParticles = <P extends Record<string, ParticleInformation>>(p: P) =>
 	p;
@@ -121,8 +121,12 @@ export const bosons = defineParticles({
 	},
 });
 
-export const fundamentalParticles = {
+export const fundamentalParticleInformation = {
 	...quarks,
 	...leptons,
 	...bosons,
-};
+} as const;
+
+export const fundamentalParticles = Object.keys(
+	fundamentalParticleInformation
+) as ParticleName[];
