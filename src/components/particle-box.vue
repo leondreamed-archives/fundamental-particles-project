@@ -1,27 +1,12 @@
 <script setup lang="ts">
-import { computed, defineProps } from 'vue';
-import type { ParticleName, ParticleType } from '~/types/particles';
+import { defineProps } from 'vue';
+import ParticleBubble from './particle-bubble.vue';
+import type { ParticleId } from '~/types/particles';
 import type { ParticleDropData } from '~/utils/particle-drop';
-import { particlesInformation, particlesToHtml } from '~/utils/particles';
 
 const props = defineProps<{
-	particleName: ParticleName;
+	particleId: ParticleId;
 }>();
-
-const particleTypeToClasses: Record<ParticleType, string> = {
-	boson: 'border-2 border-red-300 bg-red-100',
-	lepton: 'border-2 border-green-300 bg-green-100',
-	quark: 'border-2 border-purple-300 bg-purple-100',
-};
-
-const particleTypeToBubbleClass: Record<ParticleType, string> = {
-	boson: 'bg-red-300',
-	lepton: 'bg-green-300',
-	quark: 'bg-purple-300',
-};
-
-const particleInfo = computed(() => particlesInformation[props.particleName]);
-const particleHtml = computed(() => particlesToHtml[props.particleName]);
 
 function onDragStart(event: DragEvent) {
 	event.dataTransfer?.setData(
@@ -29,7 +14,7 @@ function onDragStart(event: DragEvent) {
 		JSON.stringify<ParticleDropData>({
 			type: 'particle-drop',
 			payload: {
-				particleName: props.particleName,
+				particleId: props.particleId,
 			},
 		})
 	);
@@ -39,26 +24,9 @@ function onDragStart(event: DragEvent) {
 <template>
 	<div
 		draggable="true"
-		class="rounded-md w-30 h-30 m-2 text-[50px] row center"
-		:class="particleTypeToClasses[particleInfo.type]"
+		class="rounded-md w-30 h-30 m-2 row center border-2 bg-white border-black"
 		@dragstart="onDragStart"
 	>
-		<div
-			class="bg-blue-200 rounded-full w-18 h-18 row center"
-			:class="particleTypeToBubbleClass[particleInfo.type]"
-		>
-			<!-- eslint-disable-next-line vue/no-v-html -->
-			<div class="particle-letter" v-html="particleHtml"></div>
-		</div>
+		<ParticleBubble :particle-id="particleId" />
 	</div>
 </template>
-
-<style scoped>
-.particle-letter {
-	font-family: 'Times New Roman', Times, serif;
-}
-
-.particle-letter :deep(sub) {
-	font-size: 1.5rem;
-}
-</style>

@@ -18,7 +18,7 @@ const particleGrid = computed(() => store.particleGrid);
 				:style="{ 'grid-row-start': rowIndex + 1 }"
 			>
 				<ParticleGridCell
-					:particle-name="particleName"
+					:current-particle-id="particleName"
 					:column="columnIndex"
 					:row="rowIndex"
 				/>

@@ -1,19 +1,19 @@
 import type { AppActionThis } from './types';
-import type { ParticleName } from '~/types/particles';
+import type { ParticleId } from '~/types/particles';
 
 type SetParticleGridProps = {
-	particleName: ParticleName;
+	particleId: ParticleId;
 	row: number;
 	column: number;
 };
 
 export function setParticleGridCell(
 	this: AppActionThis,
-	{ particleName, column, row }: SetParticleGridProps
+	{ particleId, column, row }: SetParticleGridProps
 ) {
 	if (this.particleGrid[row] === undefined) {
 		throw new Error(`Invalid row: ${row}`);
 	}
 
-	this.particleGrid[row]![column] = particleName;
+	this.particleGrid[row]![column] = particleId;
 }

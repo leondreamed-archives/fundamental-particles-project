@@ -1,9 +1,9 @@
-import type { ParticleName } from '~/types/particles';
+import type { ParticleId } from '~/types/particles';
 
 export type ParticleDropData = {
 	type: 'particle-drop';
 	payload: {
-		particleName: ParticleName;
+		particleId: ParticleId;
 	};
 };
 

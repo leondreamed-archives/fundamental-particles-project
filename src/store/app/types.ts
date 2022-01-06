@@ -1,8 +1,8 @@
 import type * as appActions from './actions';
-import type { ParticleName } from '~/types/particles';
+import type { ParticleId } from '~/types/particles';
 import type { ActionThis, GetterThis, RawStore } from '~/types/store';
 
-type P = ParticleName | undefined;
+type P = ParticleId | undefined;
 export type AppStoreState = {
 	// prettier-ignore
 	particleGrid: [
