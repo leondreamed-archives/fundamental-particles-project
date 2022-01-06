@@ -1,0 +1,10 @@
+{
+	"extends": "./tsconfig.json",
+	"include": [
+		"./src",
+		"windi.config.ts",
+		"vite.config.ts",
+		"jest.config.js",
+		".eslintrc.cjs"
+	]
+}
