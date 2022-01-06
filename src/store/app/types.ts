@@ -1,6 +1,6 @@
-import * as appActions from './actions';
-import { ParticleName } from '~/types/particles';
-import { ActionThis, GetterThis, RawStore } from '~/types/store';
+import type * as appActions from './actions';
+import type { ParticleName } from '~/types/particles';
+import type { ActionThis, GetterThis, RawStore } from '~/types/store';
 
 type P = ParticleName | undefined;
 export type AppStoreState = {
@@ -14,7 +14,7 @@ export type AppStoreState = {
 };
 
 type AppActions = typeof appActions;
-type AppGetters = Record<string, never>;
+type AppGetters = Record<never, never>;
 
 export type AppActionThis = ActionThis<
 	'app',

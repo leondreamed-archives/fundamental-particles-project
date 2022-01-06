@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, defineProps } from 'vue';
 import type { ParticleName, ParticleType } from '~/types/particles';
+import type { ParticleDropData } from '~/utils/particle-drop';
 import { particlesInformation, particlesToHtml } from '~/utils/particles';
 
 const props = defineProps<{
@@ -21,12 +22,26 @@ const particleTypeToBubbleClass: Record<ParticleType, string> = {
 
 const particleInfo = computed(() => particlesInformation[props.particleName]);
 const particleHtml = computed(() => particlesToHtml[props.particleName]);
+
+function onDragStart(event: DragEvent) {
+	event.dataTransfer?.setData(
+		'data',
+		JSON.stringify<ParticleDropData>({
+			type: 'particle-drop',
+			payload: {
+				particleName: props.particleName,
+			},
+		})
+	);
+}
 </script>
 
 <template>
 	<div
+		draggable="true"
 		class="rounded-md w-30 h-30 m-2 text-[50px] row center"
 		:class="particleTypeToClasses[particleInfo.type]"
+		@dragstart="onDragStart"
 	>
 		<div
 			class="bg-blue-200 rounded-full w-18 h-18 row center"

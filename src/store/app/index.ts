@@ -14,4 +14,5 @@ export const useAppStore = defineStore({
 		],
 	}),
 	actions: { ...appActions },
+	getters: {},
 });

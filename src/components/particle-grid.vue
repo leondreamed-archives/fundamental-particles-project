@@ -9,11 +9,20 @@ const particleGrid = computed(() => store.particleGrid);
 </script>
 
 <template>
-	<div>
-		<div v-for="(row, index) of particleGrid" :key="index" class="row">
-			<div v-for="particleName of row" :key="particleName">
-				<ParticleGridCell :particle-name="particleName" />
+	<div class="grid grid-rows-4 grid-cols-5 overflow-hidden">
+		<template v-for="(particleRow, rowIndex) of particleGrid" :key="rowIndex">
+			<div
+				v-for="(particleName, columnIndex) of particleRow"
+				:key="particleName"
+				class="row"
+				:style="{ 'grid-row-start': rowIndex + 1 }"
+			>
+				<ParticleGridCell
+					:particle-name="particleName"
+					:column="columnIndex"
+					:row="rowIndex"
+				/>
 			</div>
-		</div>
+		</template>
 	</div>
 </template>

@@ -15,9 +15,5 @@ export function setParticleGridCell(
 		throw new Error(`Invalid row: ${row}`);
 	}
 
-	if (this.particleGrid[row]?.[column] === undefined) {
-		throw new Error(`Invalid column: ${column}`);
-	}
-
 	this.particleGrid[row]![column] = particleName;
 }

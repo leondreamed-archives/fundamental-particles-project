@@ -14,7 +14,7 @@ const leftoverParticles = computed(() =>
 </script>
 
 <template>
-	<div class="row flex-wrap justify-center">
+	<div class="row flex-wrap content-start">
 		<div v-for="particleName of leftoverParticles" :key="particleName">
 			<ParticleBox :particle-name="particleName" />
 		</div>
