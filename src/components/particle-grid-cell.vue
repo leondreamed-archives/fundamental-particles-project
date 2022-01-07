@@ -5,7 +5,7 @@ import { useAppStore } from '~/store/app';
 import type { ParticleId, ParticleType } from '~/types/particles';
 import { isParticleDrop } from '~/utils/particle-drop';
 import { expectedParticles } from '~/utils/particle-grid';
-import { particlesInformation } from '~/utils/particles';
+import { getParticleInfo } from '~/utils/particles';
 
 const props = defineProps<{
 	currentParticleId: ParticleId | undefined;
@@ -15,8 +15,8 @@ const props = defineProps<{
 const expectedParticleId = computed(
 	() => [expectedParticles[props.row]![props.column]!].flat()[0]!
 );
-const expectedParticleInfo = computed(
-	() => particlesInformation[expectedParticleId.value]
+const expectedParticleInfo = computed(() =>
+	getParticleInfo(expectedParticleId.value)
 );
 
 const particleTypeToContainerClasses: Record<ParticleType, string> = {

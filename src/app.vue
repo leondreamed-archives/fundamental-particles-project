@@ -4,7 +4,7 @@ import ParticleGrid from './components/particle-grid.vue';
 </script>
 
 <template>
-	<div class="grid grid-rows-[2fr_1fr] h-full">
+	<div class="column h-full">
 		<ParticleGrid class="m-auto" />
 		<ParticleDock />
 	</div>

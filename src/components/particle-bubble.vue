@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import type { ParticleId, ParticleType } from '~/types/particles';
-import { particlesInformation, particlesToHtml } from '~/utils/particles';
+import { getParticleInfo, getParticleNameHtml } from '~/utils/particles';
 
 const props = defineProps<{ particleId: ParticleId }>();
 const particleTypeToBubbleClass: Record<ParticleType, string> = {
@@ -10,8 +10,8 @@ const particleTypeToBubbleClass: Record<ParticleType, string> = {
 	quark: 'bg-purple-300',
 };
 
-const particleHtml = computed(() => particlesToHtml[props.particleId]);
-const particleInfo = computed(() => particlesInformation[props.particleId]);
+const particleHtml = computed(() => getParticleNameHtml(props.particleId));
+const particleInfo = computed(() => getParticleInfo(props.particleId));
 </script>
 
 <template>
