@@ -19,8 +19,8 @@ watch(
 
 // Reset errors when the grid changes
 watch(store.particleGrid, () => {
-	console.log('hi');
 	store.highlightErrors = false;
+	store.isComplete = false;
 });
 </script>
 
