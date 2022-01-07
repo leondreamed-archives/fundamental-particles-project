@@ -55,7 +55,7 @@
 	},
 	"simple-git-hooks": {
 		"pre-commit": "node --loader ts-node/esm ./scripts/hooks/pre-commit.ts",
-		"pre-push": "node --loader ts-node/esm ./scripts/hooks/pre-push.ts"
+		"pre-push": "if [[ $(git branch --show-current) == 'main' ]]; then node --loader ts-node/esm ./scripts/hooks/pre-push.ts; fi"
 	},
 	"lint-staged": {
 		"*.{js,ts,vue}": [
