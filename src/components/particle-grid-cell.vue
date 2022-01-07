@@ -23,35 +23,85 @@ const expectedParticleInfo = computed(() =>
 	getParticleInfo(expectedParticleId.value)
 );
 
-const particleTypeToEmptyContainerClasses: Record<ParticleType, string> = {
-	boson: 'border-red-100 bg-red-50',
-	lepton: 'border-green-100 bg-green-50',
-	quark: 'border-purple-100 bg-purple-50',
+const emptyContainerClasses: Record<
+	ParticleType,
+	{ bg: string; border: string }
+> = {
+	boson: {
+		bg: 'bg-orange-50',
+		border: 'border-orange-50',
+	},
+	lepton: {
+		bg: 'bg-cyan-50',
+		border: 'border-cyan-50',
+	},
+	quark: {
+		bg: 'bg-purple-50',
+		border: 'border-purple-50',
+	},
 };
-const particleTypeToContainerClasses: Record<ParticleType, string> = {
-	boson: 'border-red-300 bg-red-100',
-	lepton: 'border-green-300 bg-green-100',
-	quark: 'border-purple-300 bg-purple-100',
+const occupiedContainerClasses: Record<
+	ParticleType,
+	{ bg: string; border: string }
+> = {
+	boson: {
+		bg: 'bg-orange-50',
+		border: 'border-orange-200',
+	},
+	lepton: {
+		bg: 'bg-cyan-50',
+		border: 'border-cyan-200',
+	},
+	quark: {
+		bg: 'bg-purple-50',
+		border: 'border-purple-200',
+	},
 };
+
+const correctBorder = 'border-green-500';
+const errorBorder = 'border-red-500';
+
 const staticClasses = 'cursor-grab';
 const particleContainerClasses = computed(() => {
+	let borderClass: string;
+	let bgClass: string;
+
+	// If the cell is empty
 	if (props.currentParticleId === undefined) {
 		if (expectedParticleId.value === 'higgsBoson') {
-			return `${staticClasses} border-yellow-100 bg-yellow-50`;
+			borderClass = 'border-yellow-100';
+			bgClass = 'bg-yellow-50';
+		} else {
+			const { bg, border } =
+				emptyContainerClasses[expectedParticleInfo.value.type];
+			borderClass = border;
+			bgClass = bg;
 		}
-
-		return `${staticClasses} ${
-			particleTypeToEmptyContainerClasses[expectedParticleInfo.value.type]
-		}`;
+	}
+	// If the cell is occupied
+	else {
+		// eslint-disable-next-line no-lonely-if
+		if (expectedParticleId.value === 'higgsBoson') {
+			bgClass = 'bg-yellow-100';
+			borderClass = 'bg-yellow-100';
+		} else {
+			const { bg, border } =
+				occupiedContainerClasses[expectedParticleInfo.value.type];
+			bgClass = bg;
+			borderClass = border;
+		}
 	}
 
-	if (expectedParticleId.value === 'higgsBoson') {
-		return `${staticClasses} border-yellow-300 bg-yellow-100`;
+	// Override border class if error
+	if (store.highlightErrors) {
+		if (props.currentParticleId === undefined) borderClass = errorBorder;
+		borderClass =
+			props.currentParticleId === expectedParticleId.value
+				? correctBorder
+				: errorBorder;
 	}
 
-	return `${staticClasses} ${
-		particleTypeToContainerClasses[expectedParticleInfo.value.type]
-	}`;
+	return `${staticClasses} ${borderClass} ${bgClass}`;
 });
 
 const store = useAppStore();
