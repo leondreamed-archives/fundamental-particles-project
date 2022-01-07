@@ -1,18 +1,11 @@
 import { defineStore } from 'pinia';
-import type { AppStoreState } from './types';
 import * as appActions from './actions';
+import * as appGetters from './getters';
+import { createAppState } from './state';
 
 export const useAppStore = defineStore({
 	id: 'app',
-	state: (): AppStoreState => ({
-		// prettier-ignore
-		particleGrid: [
-			[undefined, undefined, undefined, undefined, undefined],
-			[undefined, undefined, undefined, undefined],
-			[undefined, undefined, undefined, undefined],
-			[undefined, undefined, undefined, undefined],
-		],
-	}),
+	state: createAppState,
 	actions: { ...appActions },
-	getters: {},
+	getters: { ...appGetters },
 });

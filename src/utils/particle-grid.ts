@@ -13,3 +13,16 @@ export const expectedParticles: [
 	['electron', 'muon', 'tau', 'zBoson'],
 	['electronNeutrino', 'muonNeutrino', 'tauNeutrino', 'wBoson']
 ]
+
+export function getExpectedParticleIds({
+	row,
+	column,
+}: {
+	row: number;
+	column: number;
+}): ParticleId[] {
+	const particlesRow = expectedParticles[row];
+	if (particlesRow === undefined) throw new Error(`Invalid row: ${row}`);
+
+	return [particlesRow[column]!].flat();
+}

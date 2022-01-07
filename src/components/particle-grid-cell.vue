@@ -8,8 +8,8 @@ import type {
 	ParticleDropData,
 } from '~/types/particles';
 import { isParticleDrop } from '~/utils/particle-drop';
-import { expectedParticles } from '~/utils/particle-grid';
 import { getParticleInfo } from '~/utils/particles';
+import { getExpectedParticleIds } from '~/utils/particle-grid';
 
 const props = defineProps<{
 	currentParticleId: ParticleId | undefined;
@@ -17,24 +17,34 @@ const props = defineProps<{
 	row: number;
 }>();
 const expectedParticleId = computed(
-	() => [expectedParticles[props.row]![props.column]!].flat()[0]!
+	() => getExpectedParticleIds({ row: props.row, column: props.column })[0]!
 );
 const expectedParticleInfo = computed(() =>
 	getParticleInfo(expectedParticleId.value)
 );
 
+const particleTypeToEmptyContainerClasses: Record<ParticleType, string> = {
+	boson: 'border-red-100 bg-red-50',
+	lepton: 'border-green-100 bg-green-50',
+	quark: 'border-purple-100 bg-purple-50',
+};
 const particleTypeToContainerClasses: Record<ParticleType, string> = {
 	boson: 'border-red-300 bg-red-100',
 	lepton: 'border-green-300 bg-green-100',
 	quark: 'border-purple-300 bg-purple-100',
 };
-const genericContainerClasses = 'bg-gray-100 border-gray-200';
+const staticClasses = 'cursor-grab';
 const particleContainerClasses = computed(() => {
 	if (props.currentParticleId === undefined) {
-		return genericContainerClasses;
+		if (expectedParticleId.value === 'higgsBoson') {
+			return `${staticClasses} border-yellow-100 bg-yellow-50`;
+		}
+
+		return `${staticClasses} ${
+			particleTypeToEmptyContainerClasses[expectedParticleInfo.value.type]
+		}`;
 	}
 
-	const staticClasses = 'cursor-grab';
 	if (expectedParticleId.value === 'higgsBoson') {
 		return `${staticClasses} border-yellow-300 bg-yellow-100`;
 	}
@@ -114,11 +124,7 @@ function onDragStart(event: DragEvent) {
 	>
 		<div
 			class="rounded-md h-40 w-40 border-2 column justify-between"
-			:class="
-				currentParticleId === undefined
-					? genericContainerClasses
-					: particleContainerClasses
-			"
+			:class="particleContainerClasses"
 		>
 			<div class="row justify-between text-xs p-2">
 				<span><strong>Charge:</strong> {{ expectedParticleInfo.charge }}</span>

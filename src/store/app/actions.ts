@@ -1,5 +1,7 @@
 import type { AppActionThis } from './types';
+import { createAppState } from './state';
 import type { ParticleId } from '~/types/particles';
+import { getExpectedParticleIds } from '~/utils/particle-grid';
 
 type SetParticleGridProps = {
 	particleId: ParticleId;
@@ -37,4 +39,40 @@ export function unsetParticleGridCell(
 ) {
 	const cellRow = this.getRow(row);
 	cellRow[column] = undefined;
+}
+
+export function checkAnswers(this: AppActionThis) {
+	this.highlightErrors = true;
+	for (let rowIndex = 0; rowIndex < this.particleGrid.length; rowIndex += 1) {
+		const row = this.getRow(rowIndex);
+		for (let columnIndex = 0; columnIndex < row.length; columnIndex += 1) {
+			const currentGridParticle = this.getParticleGridCell({
+				row: rowIndex,
+				column: columnIndex,
+			});
+			if (
+				currentGridParticle === undefined ||
+				!getExpectedParticleIds({
+					row: rowIndex,
+					column: columnIndex,
+				}).includes(currentGridParticle)
+			) {
+				return false;
+			}
+		}
+	}
+
+	this.isComplete = true;
+	return true;
+}
+
+export function reset(this: AppActionThis) {
+	this.$state = createAppState();
+}
+
+export async function shootConfetti(this: AppActionThis) {
+	await this.createConfetti?.({
+		particleCount: 100,
+		spread: 160,
+	});
 }

@@ -45,16 +45,25 @@ function onDrop(event: DragEvent) {
 			</div>
 		</div>
 		<div class="row gap-3">
-			<div
-				class="font-bold text-white bg-green-500 px-5 py-2 rounded-md cursor-pointer"
+			<div v-if="store.isComplete" @click="() => store.createConfetti?.()">
+				Congratulations!
+			</div>
+			<button
+				class="font-bold text-white bg-green-500 px-5 py-2 rounded-md"
+				@click="store.checkAnswers"
 			>
 				Check Answers
-			</div>
-			<div
-				class="font-bold text-white bg-red-500 px-5 p-2 rounded-md cursor-pointer"
+			</button>
+			<button
+				:disabled="store.isGridEmpty"
+				class="font-bold text-white px-5 p-2 rounded-md"
+				:class="[
+					store.isGridEmpty ? 'bg-red-300 cursor-not-allowed' : 'bg-red-500',
+				]"
+				@click="store.reset"
 			>
 				Reset
-			</div>
+			</button>
 		</div>
 	</div>
 </template>
