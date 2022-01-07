@@ -28,5 +28,6 @@ function onDragStart(event: DragEvent) {
 		@dragstart="onDragStart"
 	>
 		<ParticleBubble :particle-id="particleId" />
+
 	</div>
 </template>
