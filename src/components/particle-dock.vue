@@ -48,7 +48,7 @@ function onDrop(event: DragEvent) {
 			<button
 				class="font-bold text-white bg-green-500 px-5 py-2 rounded-md"
 				@click="
-					store.isComplete ? store.checkAnswers : () => store.createConfetti?.()
+					store.isComplete ? () => store.createConfetti?.() : store.checkAnswers
 				"
 			>
 				{{ store.isComplete ? 'Congratulations!' : 'Check Answers' }}
