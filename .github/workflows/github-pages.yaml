@@ -5,7 +5,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: pnpm/action-setup@v2.5.1
+      - name: Using pnpm
+        uses: pnpm/action-setup@v2.0.1
 
       - name: Checkout 🛎️
         uses: actions/checkout@v2.5.1
