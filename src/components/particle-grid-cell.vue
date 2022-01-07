@@ -15,11 +15,11 @@ const props = defineProps<{
 	column: number;
 	row: number;
 }>();
-const answerParticleId = computed(
-	() => store.getAnswerParticleIds({ row: props.row, column: props.column })[0]!
+const answerParticleIds = computed(() =>
+	store.getAnswerParticleIds({ row: props.row, column: props.column })
 );
 const answerParticleInfo = computed(() =>
-	getParticleInfo(answerParticleId.value)
+	getParticleInfo(answerParticleIds.value[0]!)
 );
 
 const emptyContainerClasses: Record<
@@ -68,7 +68,7 @@ const particleContainerClasses = computed(() => {
 
 	// If the cell is empty
 	if (props.currentParticleId === undefined) {
-		if (answerParticleId.value === 'higgsBoson') {
+		if (answerParticleIds.value.includes('higgsBoson')) {
 			borderClass = 'border-yellow-100';
 			bgClass = 'bg-yellow-50';
 		} else {
@@ -81,7 +81,7 @@ const particleContainerClasses = computed(() => {
 	// If the cell is occupied
 	else {
 		// eslint-disable-next-line no-lonely-if
-		if (answerParticleId.value === 'higgsBoson') {
+		if (answerParticleIds.value.includes('higgsBoson')) {
 			bgClass = 'bg-yellow-100';
 			borderClass = 'bg-yellow-100';
 		} else {
@@ -96,7 +96,8 @@ const particleContainerClasses = computed(() => {
 	if (store.highlightErrors) {
 		if (props.currentParticleId === undefined) borderClass = errorBorder;
 		borderClass =
-			props.currentParticleId === answerParticleId.value
+			props.currentParticleId !== undefined &&
+			answerParticleIds.value.includes(props.currentParticleId)
 				? correctBorder
 				: errorBorder;
 	}

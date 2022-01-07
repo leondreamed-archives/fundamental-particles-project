@@ -45,14 +45,13 @@ function onDrop(event: DragEvent) {
 			</div>
 		</div>
 		<div class="row gap-3">
-			<div v-if="store.isComplete" @click="() => store.createConfetti?.()">
-				Congratulations!
-			</div>
 			<button
 				class="font-bold text-white bg-green-500 px-5 py-2 rounded-md"
-				@click="store.checkAnswers"
+				@click="
+					store.isComplete ? store.checkAnswers : () => store.createConfetti?.()
+				"
 			>
-				Check Answers
+				{{ store.isComplete ? 'Congratulations!' : 'Check Answers' }}
 			</button>
 			<button
 				:disabled="store.isGridEmpty"
