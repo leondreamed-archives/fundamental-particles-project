@@ -11,3 +11,14 @@ export type ParticleInformation = {
 };
 
 export type ParticleId = keyof typeof particlesInformation;
+
+export type ParticleDropData = {
+	type: 'particle-drop';
+	payload: {
+		particleId: ParticleId;
+		sourceCell?: {
+			row: number;
+			column: number;
+		};
+	};
+};

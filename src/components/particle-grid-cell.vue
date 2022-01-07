@@ -2,7 +2,11 @@
 import { computed } from 'vue';
 import ParticleBubble from './particle-bubble.vue';
 import { useAppStore } from '~/store/app';
-import type { ParticleId, ParticleType } from '~/types/particles';
+import type {
+	ParticleId,
+	ParticleType,
+	ParticleDropData,
+} from '~/types/particles';
 import { isParticleDrop } from '~/utils/particle-drop';
 import { expectedParticles } from '~/utils/particle-grid';
 import { getParticleInfo } from '~/utils/particles';
@@ -30,26 +34,72 @@ const particleContainerClasses = computed(() => {
 		return genericContainerClasses;
 	}
 
+	const staticClasses = 'cursor-grab';
 	if (expectedParticleId.value === 'higgsBoson') {
-		return 'border-yellow-300 bg-yellow-100';
+		return `${staticClasses} border-yellow-300 bg-yellow-100`;
 	}
 
-	return particleTypeToContainerClasses[expectedParticleInfo.value.type];
+	return `${staticClasses} ${
+		particleTypeToContainerClasses[expectedParticleInfo.value.type]
+	}`;
 });
 
 const store = useAppStore();
 
 function onDrop(event: DragEvent) {
 	const dropData = event.dataTransfer?.getData('data') ?? '';
-	if (dropData !== '') {
-		const data = JSON.parse(dropData) as unknown;
-		if (isParticleDrop(data)) {
-			store.setParticleGridCell({
-				particleId: data.payload.particleId,
-				column: props.column,
-				row: props.row,
+	if (dropData === '') return;
+	const data = JSON.parse(dropData) as unknown;
+	if (isParticleDrop(data)) {
+		const { payload } = data;
+		if (payload.sourceCell !== undefined) {
+			const { row: sourceRow, column: sourceColumn } = payload.sourceCell;
+			const sourceParticleId = store.getParticleGridCell({
+				column: sourceColumn,
+				row: sourceRow,
 			});
+
+			// If there's a particle at the source cell, set the source particle to the current one
+			if (sourceParticleId !== undefined) {
+				// If there's a particle at the destination cell, then set the sourc
+				if (props.currentParticleId === undefined) {
+					store.unsetParticleGridCell({
+						column: sourceColumn,
+						row: sourceRow,
+					});
+				} else {
+					store.setParticleGridCell({
+						particleId: props.currentParticleId,
+						column: sourceColumn,
+						row: sourceRow,
+					});
+				}
+			}
 		}
+
+		store.setParticleGridCell({
+			particleId: data.payload.particleId,
+			column: props.column,
+			row: props.row,
+		});
+	}
+}
+
+function onDragStart(event: DragEvent) {
+	if (props.currentParticleId !== undefined) {
+		event.dataTransfer?.setData(
+			'data',
+			JSON.stringify<ParticleDropData>({
+				type: 'particle-drop',
+				payload: {
+					particleId: props.currentParticleId,
+					sourceCell: {
+						row: props.row,
+						column: props.column,
+					},
+				},
+			})
+		);
 	}
 }
 </script>
@@ -62,6 +112,8 @@ function onDrop(event: DragEvent) {
 				? genericContainerClasses
 				: particleContainerClasses
 		"
+		:draggable="currentParticleId !== undefined"
+		@dragstart="onDragStart"
 		@drop.prevent="onDrop"
 		@dragover.prevent
 	>

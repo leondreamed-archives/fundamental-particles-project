@@ -1,11 +1,4 @@
-import type { ParticleId } from '~/types/particles';
-
-export type ParticleDropData = {
-	type: 'particle-drop';
-	payload: {
-		particleId: ParticleId;
-	};
-};
+import type { ParticleDropData } from '~/types/particles';
 
 export function isParticleDrop(data: unknown): data is ParticleDropData {
 	if (data !== null && typeof data === 'object') {
