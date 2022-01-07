@@ -9,7 +9,7 @@ const particleGrid = computed(() => store.particleGrid);
 </script>
 
 <template>
-	<div class="overflow-auto">
+	<div class="overflow-y-auto overflow-x-hidden">
 		<div class="grid grid-rows-4 grid-cols-5">
 			<template v-for="(particleRow, rowIndex) of particleGrid" :key="rowIndex">
 				<div

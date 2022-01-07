@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import ParticleBubble from './particle-bubble.vue';
-import type { ParticleId } from '~/types/particles';
-import type { ParticleDropData } from '~/utils/particle-drop';
+import type { ParticleDropData, ParticleId } from '~/types/particles';
 import { getParticleInfo } from '~/utils/particles';
 
 const props = defineProps<{

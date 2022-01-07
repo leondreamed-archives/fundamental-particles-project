@@ -106,32 +106,36 @@ function onDragStart(event: DragEvent) {
 
 <template>
 	<div
-		class="rounded-md m-2 h-40 w-40 border-2 column justify-between"
-		:class="
-			currentParticleId === undefined
-				? genericContainerClasses
-				: particleContainerClasses
-		"
+		class="p-2"
 		:draggable="currentParticleId !== undefined"
 		@dragstart="onDragStart"
 		@drop.prevent="onDrop"
 		@dragover.prevent
 	>
-		<div class="row justify-between text-xs p-2">
-			<span><strong>Charge:</strong> {{ expectedParticleInfo.charge }}</span>
-			<span><strong>Spin:</strong> {{ expectedParticleInfo.spin }}</span>
-		</div>
+		<div
+			class="rounded-md h-40 w-40 border-2 column justify-between"
+			:class="
+				currentParticleId === undefined
+					? genericContainerClasses
+					: particleContainerClasses
+			"
+		>
+			<div class="row justify-between text-xs p-2">
+				<span><strong>Charge:</strong> {{ expectedParticleInfo.charge }}</span>
+				<span><strong>Spin:</strong> {{ expectedParticleInfo.spin }}</span>
+			</div>
 
-		<ParticleBubble
-			v-if="currentParticleId !== undefined"
-			class="self-center"
-			:particle-id="currentParticleId"
-		/>
+			<ParticleBubble
+				v-if="currentParticleId !== undefined"
+				class="self-center"
+				:particle-id="currentParticleId"
+			/>
 
-		<div class="text-center text-sm pb-1">
-			<strong>Mass: </strong>
-			<!-- eslint-disable-next-line vue/no-v-html -->
-			<span v-html="expectedParticleInfo.mass"></span>
+			<div class="text-center text-sm pb-1">
+				<strong>Mass: </strong>
+				<!-- eslint-disable-next-line vue/no-v-html -->
+				<span v-html="expectedParticleInfo.mass"></span>
+			</div>
 		</div>
 	</div>
 </template>
