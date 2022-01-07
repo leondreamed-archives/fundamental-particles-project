@@ -3,6 +3,7 @@ import { computed } from 'vue';
 import ParticleBubble from './particle-bubble.vue';
 import type { ParticleDropData, ParticleId } from '~/types/particles';
 import { getParticleInfo } from '~/utils/particles';
+import { useAppStore } from '~/store/app';
 
 const props = defineProps<{
 	particleId: ParticleId;
@@ -10,12 +11,18 @@ const props = defineProps<{
 
 const particleInfo = computed(() => getParticleInfo(props.particleId));
 
+const store = useAppStore();
+
 function onDragStart(event: DragEvent) {
 	event.dataTransfer?.setData(
 		'data',
 		JSON.stringify<ParticleDropData>({
 			type: 'particle-drop',
 			payload: {
+				source: {
+					type: 'dock',
+					index: store.particleDock.indexOf(props.particleId),
+				},
 				particleId: props.particleId,
 			},
 		})

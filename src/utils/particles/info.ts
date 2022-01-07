@@ -9,6 +9,6 @@ export const particlesInformation = {
 	...bosons,
 } as const;
 
-export const fundamentalParticles = Object.keys(
+export const fundamentalParticleIds = Object.keys(
 	particlesInformation
 ) as ParticleId[];

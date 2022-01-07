@@ -1,29 +1,22 @@
 <script setup lang="ts">
-import { computed } from 'vue';
 import ParticleBox from './particle-box.vue';
 import { useAppStore } from '~/store/app';
-import { fundamentalParticles } from '~/utils/particles';
 import { isParticleDrop } from '~/utils/particle-drop';
 
 const store = useAppStore();
-
-const leftoverParticles = computed(() =>
-	fundamentalParticles.filter(
-		(particle) => !store.particleGrid.flat().includes(particle)
-	)
-);
 
 function onDrop(event: DragEvent) {
 	const dropData = event.dataTransfer?.getData('data') ?? '';
 	if (dropData !== '') {
 		const data = JSON.parse(dropData) as unknown;
 		if (isParticleDrop(data)) {
-			const { sourceCell } = data.payload;
-			if (sourceCell !== undefined) {
+			const { source, particleId } = data.payload;
+			if (source.type === 'grid') {
 				store.unsetParticleGridCell({
-					column: sourceCell.column,
-					row: sourceCell.row,
+					column: source.column,
+					row: source.row,
 				});
+				store.particleDock.push(particleId);
 			}
 		}
 	}
@@ -38,15 +31,15 @@ function onDrop(event: DragEvent) {
 	>
 		<div
 			class="row flex-wrap content-start z-1 justify-center"
-			:class="{ 'mb-3': leftoverParticles.length > 0 }"
+			:class="{ 'mb-3': store.particleDock.length > 0 }"
 		>
-			<div v-for="particleId of leftoverParticles" :key="particleId">
+			<div v-for="particleId of store.particleDock" :key="particleId">
 				<ParticleBox :particle-id="particleId" />
 			</div>
 		</div>
 		<div class="row gap-3">
 			<button
-				class="font-bold text-white bg-green-500 px-5 py-2 rounded-md"
+				class="font-bold text-white bg-green-500 px-5 py-2 rounded-md hover:bg-green-600"
 				@click="
 					() =>
 						store.isComplete ? store.createConfetti?.() : store.checkAnswers()
@@ -58,7 +51,7 @@ function onDrop(event: DragEvent) {
 				:disabled="store.isGridEmpty"
 				class="font-bold text-white px-5 p-2 rounded-md"
 				:class="[
-					store.isGridEmpty ? 'bg-red-300 cursor-not-allowed' : 'bg-red-500',
+					store.isGridEmpty ? 'bg-red-300 cursor-not-allowed' : 'bg-red-500 hover:bg-red-600',
 				]"
 				@click="store.reset"
 			>

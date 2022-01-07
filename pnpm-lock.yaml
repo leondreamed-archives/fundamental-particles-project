@@ -32,6 +32,7 @@ specifiers:
   vite: ^2.7.2
   vite-tsconfig-paths: ^3.3.17
   vue: ^3.2.25
+  vue-router: ^4.0.12
   vue-tsc: ^0.30.2
 
 dependencies:
@@ -40,6 +41,7 @@ dependencies:
   map-obj: 5.0.0
   pinia: 2.0.0-rc.10_typescript@4.5.4+vue@3.2.26
   vue: 3.2.26
+  vue-router: 4.0.12_vue@3.2.26
 
 devDependencies:
   '@commitlint/cli': 15.0.0
@@ -6488,6 +6490,15 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /vue-router/4.0.12_vue@3.2.26:
+    resolution: {integrity: sha512-CPXvfqe+mZLB1kBWssssTiWg4EQERyqJZes7USiqfW9B5N2x+nHlnsM1D3b5CaJ6qgCvMmYJnz+G0iWjNCvXrg==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      '@vue/devtools-api': 6.0.0-beta.21.1
+      vue: 3.2.26
+    dev: false
 
   /vue-tsc/0.30.2_typescript@4.5.4:
     resolution: {integrity: sha512-A8KIk5KwQTbSdsrDxwJkFYLPqDJ1zM86w3X8cgpi6rveozKUGDMPt300awEz61sTuBM9fAfUhNRcsWbsJ1I+TQ==}

@@ -16,10 +16,16 @@ export type ParticleDropData = {
 	type: 'particle-drop';
 	payload: {
 		particleId: ParticleId;
-		sourceCell?: {
-			row: number;
-			column: number;
-		};
+		source:
+			| {
+					type: 'grid';
+					row: number;
+					column: number;
+			  }
+			| {
+					type: 'dock';
+					index: number;
+			  };
 	};
 };
 

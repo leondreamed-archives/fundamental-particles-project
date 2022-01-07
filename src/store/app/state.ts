@@ -1,5 +1,6 @@
 import type { AppStoreState } from './types';
 import { orderedParticleAnswerGrid } from '~/utils/particle-grid';
+import { fundamentalParticleIds } from '~/utils/particles';
 
 export function createAppState(): AppStoreState {
 	return {
@@ -7,13 +8,14 @@ export function createAppState(): AppStoreState {
 		createConfetti: undefined,
 		isComplete: false,
 		highlightErrors: false,
-		// prettier-ignore
 		particleAnswerGrid: orderedParticleAnswerGrid,
+		// prettier-ignore
 		particleGrid: [
 			[undefined, undefined, undefined, undefined, undefined],
 			[undefined, undefined, undefined, undefined],
 			[undefined, undefined, undefined, undefined],
 			[undefined, undefined, undefined, undefined],
 		],
+		particleDock: [...fundamentalParticleIds],
 	};
 }

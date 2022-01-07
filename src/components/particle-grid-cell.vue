@@ -113,8 +113,8 @@ function onDrop(event: DragEvent) {
 	const data = JSON.parse(dropData) as unknown;
 	if (isParticleDrop(data)) {
 		const { payload } = data;
-		if (payload.sourceCell !== undefined) {
-			const { row: sourceRow, column: sourceColumn } = payload.sourceCell;
+		if (payload.source.type === 'grid') {
+			const { row: sourceRow, column: sourceColumn } = payload.source;
 			const sourceParticleId = store.getParticleGridCell({
 				column: sourceColumn,
 				row: sourceRow,
@@ -136,6 +136,15 @@ function onDrop(event: DragEvent) {
 					});
 				}
 			}
+		} else if (payload.source.type === 'dock') {
+			const { index } = payload.source;
+
+			// Move the current particle to the dock
+			if (props.currentParticleId === undefined) {
+				store.particleDock.splice(index, 1);
+			} else {
+				store.particleDock.splice(index, 1, props.currentParticleId);
+			}
 		}
 
 		store.setParticleGridCell({
@@ -154,7 +163,8 @@ function onDragStart(event: DragEvent) {
 				type: 'particle-drop',
 				payload: {
 					particleId: props.currentParticleId,
-					sourceCell: {
+					source: {
+						type: 'grid',
 						row: props.row,
 						column: props.column,
 					},
