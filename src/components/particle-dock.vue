@@ -32,12 +32,29 @@ function onDrop(event: DragEvent) {
 
 <template>
 	<div
-		class="row flex-wrap content-start bg-white border-t-2 border-gray-200 z-1 p-10 justify-center min-h-[20rem]"
+		class="column items-center p-5 bg-white border-t-2 border-gray-200"
 		@drop.prevent="onDrop"
 		@dragover.prevent
 	>
-		<div v-for="particleId of leftoverParticles" :key="particleId">
-			<ParticleBox :particle-id="particleId" />
+		<div
+			class="row flex-wrap content-start z-1 justify-center"
+			:class="{ 'mb-5': leftoverParticles.length > 0 }"
+		>
+			<div v-for="particleId of leftoverParticles" :key="particleId">
+				<ParticleBox :particle-id="particleId" />
+			</div>
+		</div>
+		<div class="row gap-3">
+			<div
+				class="font-bold text-white bg-green-500 px-5 py-2 rounded-md cursor-pointer"
+			>
+				Check Answers
+			</div>
+			<div
+				class="font-bold text-white bg-red-500 px-5 p-2 rounded-md cursor-pointer"
+			>
+				Reset
+			</div>
 		</div>
 	</div>
 </template>
