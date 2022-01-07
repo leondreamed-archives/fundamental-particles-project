@@ -1,13 +1,36 @@
+import arrayShuffle from 'array-shuffle';
 import type { AppActionThis } from './types';
 import { createAppState } from './state';
-import type { ParticleId } from '~/types/particles';
-import { getExpectedParticleIds } from '~/utils/particle-grid';
+import type { ParticleAnswerGrid, ParticleId } from '~/types/particles';
+import { orderedParticleAnswerGrid } from '~/utils/particle-grid';
 
 type SetParticleGridProps = {
 	particleId: ParticleId;
 	row: number;
 	column: number;
 };
+
+export function randomizeAnswerGrid(this: AppActionThis) {
+	this.particleAnswerGrid = arrayShuffle(
+		orderedParticleAnswerGrid
+	) as ParticleAnswerGrid;
+}
+
+export function getAnswerParticleIds(
+	this: AppActionThis,
+	{
+		row,
+		column,
+	}: {
+		row: number;
+		column: number;
+	}
+): ParticleId[] {
+	const particlesRow = this.particleAnswerGrid[row];
+	if (particlesRow === undefined) throw new Error(`Invalid row: ${row}`);
+
+	return [particlesRow[column]!].flat();
+}
 
 export function getRow(this: AppActionThis, rowIndex: number) {
 	if (this.particleGrid[rowIndex] === undefined) {
@@ -52,7 +75,7 @@ export function checkAnswers(this: AppActionThis) {
 			});
 			if (
 				currentGridParticle === undefined ||
-				!getExpectedParticleIds({
+				!this.getAnswerParticleIds({
 					row: rowIndex,
 					column: columnIndex,
 				}).includes(currentGridParticle)

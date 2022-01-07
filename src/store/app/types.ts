@@ -1,21 +1,16 @@
 import type { CreateTypes } from 'canvas-confetti';
 import type * as appActions from './actions';
 import type * as appGetters from './getters';
-import type { ParticleId } from '~/types/particles';
+import type { ParticleAnswerGrid, ParticleGrid } from '~/types/particles';
 import type { ActionThis, GetterThis, RawStore } from '~/types/store';
 
-type P = ParticleId | undefined;
 export type AppStoreState = {
+	hardMode: boolean;
 	createConfetti: undefined | CreateTypes;
 	isComplete: boolean;
 	highlightErrors: boolean;
-	// prettier-ignore
-	particleGrid: [
-		[P, P, P, P, P],
-		[P, P, P, P],
-		[P, P, P, P],
-		[P, P, P, P]
-	]
+	particleGrid: ParticleGrid;
+	particleAnswerGrid: ParticleAnswerGrid;
 };
 
 type AppActions = typeof appActions;

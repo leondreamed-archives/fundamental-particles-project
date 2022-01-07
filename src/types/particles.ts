@@ -22,3 +22,21 @@ export type ParticleDropData = {
 		};
 	};
 };
+
+type P = ParticleId | undefined;
+// prettier-ignore
+export type ParticleGrid = [
+	[P, P, P, P, P],
+	[P, P, P, P],
+	[P, P, P, P],
+	[P, P, P, P]
+];
+
+type A = ParticleId | ParticleId[];
+// prettier-ignore
+export type ParticleAnswerGrid = [
+	[A, A, A, A, A],
+	[A, A, A, A],
+	[A, A, A, A],
+	[A, A, A, A]
+];

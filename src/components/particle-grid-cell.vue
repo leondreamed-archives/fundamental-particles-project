@@ -9,18 +9,17 @@ import type {
 } from '~/types/particles';
 import { isParticleDrop } from '~/utils/particle-drop';
 import { getParticleInfo } from '~/utils/particles';
-import { getExpectedParticleIds } from '~/utils/particle-grid';
 
 const props = defineProps<{
 	currentParticleId: ParticleId | undefined;
 	column: number;
 	row: number;
 }>();
-const expectedParticleId = computed(
-	() => getExpectedParticleIds({ row: props.row, column: props.column })[0]!
+const answerParticleId = computed(
+	() => store.getAnswerParticleIds({ row: props.row, column: props.column })[0]!
 );
-const expectedParticleInfo = computed(() =>
-	getParticleInfo(expectedParticleId.value)
+const answerParticleInfo = computed(() =>
+	getParticleInfo(answerParticleId.value)
 );
 
 const emptyContainerClasses: Record<
@@ -61,19 +60,20 @@ const occupiedContainerClasses: Record<
 const correctBorder = 'border-green-500';
 const errorBorder = 'border-red-500';
 
-const staticClasses = 'cursor-grab';
 const particleContainerClasses = computed(() => {
+	const cursorClass =
+		props.currentParticleId === undefined ? '' : 'cursor-grab';
 	let borderClass: string;
 	let bgClass: string;
 
 	// If the cell is empty
 	if (props.currentParticleId === undefined) {
-		if (expectedParticleId.value === 'higgsBoson') {
+		if (answerParticleId.value === 'higgsBoson') {
 			borderClass = 'border-yellow-100';
 			bgClass = 'bg-yellow-50';
 		} else {
 			const { bg, border } =
-				emptyContainerClasses[expectedParticleInfo.value.type];
+				emptyContainerClasses[answerParticleInfo.value.type];
 			borderClass = border;
 			bgClass = bg;
 		}
@@ -81,12 +81,12 @@ const particleContainerClasses = computed(() => {
 	// If the cell is occupied
 	else {
 		// eslint-disable-next-line no-lonely-if
-		if (expectedParticleId.value === 'higgsBoson') {
+		if (answerParticleId.value === 'higgsBoson') {
 			bgClass = 'bg-yellow-100';
 			borderClass = 'bg-yellow-100';
 		} else {
 			const { bg, border } =
-				occupiedContainerClasses[expectedParticleInfo.value.type];
+				occupiedContainerClasses[answerParticleInfo.value.type];
 			bgClass = bg;
 			borderClass = border;
 		}
@@ -96,12 +96,12 @@ const particleContainerClasses = computed(() => {
 	if (store.highlightErrors) {
 		if (props.currentParticleId === undefined) borderClass = errorBorder;
 		borderClass =
-			props.currentParticleId === expectedParticleId.value
+			props.currentParticleId === answerParticleId.value
 				? correctBorder
 				: errorBorder;
 	}
 
-	return `${staticClasses} ${borderClass} ${bgClass}`;
+	return `${cursorClass} ${borderClass} ${bgClass}`;
 });
 
 const store = useAppStore();
@@ -177,8 +177,8 @@ function onDragStart(event: DragEvent) {
 			:class="particleContainerClasses"
 		>
 			<div class="row justify-between text-xs p-2">
-				<span><strong>Charge:</strong> {{ expectedParticleInfo.charge }}</span>
-				<span><strong>Spin:</strong> {{ expectedParticleInfo.spin }}</span>
+				<span><strong>Charge:</strong> {{ answerParticleInfo.charge }}</span>
+				<span><strong>Spin:</strong> {{ answerParticleInfo.spin }}</span>
 			</div>
 
 			<ParticleBubble
@@ -190,7 +190,7 @@ function onDragStart(event: DragEvent) {
 			<div class="text-center text-sm pb-1">
 				<strong>Mass: </strong>
 				<!-- eslint-disable-next-line vue/no-v-html -->
-				<span v-html="expectedParticleInfo.mass"></span>
+				<span v-html="answerParticleInfo.mass"></span>
 			</div>
 		</div>
 	</div>

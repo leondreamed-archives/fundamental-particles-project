@@ -21,6 +21,7 @@
 		"tc": "vue-tsc --noEmit"
 	},
 	"dependencies": {
+		"array-shuffle": "^3.0.0",
 		"canvas-confetti": "^1.4.0",
 		"map-obj": "^5.0.0",
 		"pinia": "^2.0.0-rc.10",
