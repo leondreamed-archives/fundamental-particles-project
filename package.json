@@ -7,6 +7,7 @@
 			"@commitlint/config-conventional"
 		]
 	},
+	"type": "module",
 	"scripts": {
 		"dev": "vite",
 		"build": "vue-tsc --noEmit && vite build",
@@ -54,7 +55,8 @@
 		"vue-tsc": "^0.30.2"
 	},
 	"simple-git-hooks": {
-		"pre-commit": "node --loader ts-node/esm ./scripts/hooks/pre-commit.ts"
+		"pre-commit": "node --loader ts-node/esm ./scripts/hooks/pre-commit.ts",
+		"pre-push": "node --loader ts-node/esm ./scripts/hooks/pre-push.ts"
 	},
 	"lint-staged": {
 		"*.{js,ts,vue}": [
