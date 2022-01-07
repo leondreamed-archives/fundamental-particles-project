@@ -2,7 +2,7 @@
 import { computed, defineProps } from 'vue';
 import ParticleBubble from './particle-bubble.vue';
 import { useAppStore } from '~/store/app';
-import type { ParticleId } from '~/types/particles';
+import type { ParticleId, ParticleType } from '~/types/particles';
 import { isParticleDrop } from '~/utils/particle-drop';
 import { expectedParticles } from '~/utils/particle-grid';
 import { particlesInformation } from '~/utils/particles';
@@ -12,11 +12,11 @@ const props = defineProps<{
 	column: number;
 	row: number;
 }>();
+const expectedParticleId = computed(
+	() => [expectedParticles[props.row]![props.column]!].flat()[0]!
+);
 const expectedParticleInfo = computed(
-	() =>
-		particlesInformation[
-			[expectedParticles[props.row]![props.column]!].flat()[0]!
-		]
+	() => particlesInformation[expectedParticleId.value]
 );
 
 const particleTypeToContainerClasses: Record<ParticleType, string> = {
@@ -25,6 +25,17 @@ const particleTypeToContainerClasses: Record<ParticleType, string> = {
 	quark: 'border-purple-300 bg-purple-100',
 };
 const genericContainerClasses = 'bg-gray-100 border-gray-200';
+const particleContainerClasses = computed(() => {
+	if (props.currentParticleId === undefined) {
+		return genericContainerClasses;
+	}
+
+	if (expectedParticleId.value === 'higgsBoson') {
+		return 'border-yellow-300 bg-yellow-100';
+	}
+
+	return particleTypeToContainerClasses[expectedParticleInfo.value.type];
+});
 
 const store = useAppStore();
 
@@ -49,7 +60,7 @@ function onDrop(event: DragEvent) {
 		:class="
 			currentParticleId === undefined
 				? genericContainerClasses
-				: particleTypeToContainerClasses[expectedParticleInfo.type]
+				: particleContainerClasses
 		"
 		@drop.prevent="onDrop"
 		@dragover.prevent
