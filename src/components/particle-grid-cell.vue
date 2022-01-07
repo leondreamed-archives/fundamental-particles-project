@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, defineProps } from 'vue';
+import { computed } from 'vue';
 import ParticleBubble from './particle-bubble.vue';
 import { useAppStore } from '~/store/app';
 import type { ParticleId, ParticleType } from '~/types/particles';

@@ -16,7 +16,7 @@ const particleInfo = computed(() => getParticleInfo(props.particleId));
 
 <template>
 	<div
-		class="bg-blue-200 rounded-full w-18 h-18 row center text-[50px]"
+		class="bg-blue-200 rounded-full w-[4.5rem] h-[4.5rem] row center text-[50px]"
 		:class="particleTypeToBubbleClass[particleInfo.type]"
 	>
 		<!-- eslint-disable-next-line vue/no-v-html -->
