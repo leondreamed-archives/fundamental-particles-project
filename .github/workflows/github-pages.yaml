@@ -9,7 +9,7 @@ jobs:
         uses: pnpm/action-setup@v2.0.1
 
       - name: Checkout 🛎️
-        uses: actions/checkout@v2.5.1
+        uses: actions/checkout@v2
 
       - name: Install and Build 🔧
         run: |
