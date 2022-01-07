@@ -1,0 +1,22 @@
+name: Build and Deploy
+on: [push]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: pnpm/action-setup@v2.5.1
+
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.5.1
+
+      - name: Install and Build 🔧
+        run: |
+          pnpm i
+          pnpm build
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.2.0
+        with:
+          branch: gh-pages
+          folder: dist
