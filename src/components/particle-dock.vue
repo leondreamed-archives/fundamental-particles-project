@@ -32,7 +32,7 @@ function onDrop(event: DragEvent) {
 
 <template>
 	<div
-		class="column items-center p-5 bg-white border-t-2 border-gray-200"
+		class="column items-center p-5 bg-white border-t-2 border-gray-200 max-h-[50vh] overflow-y-auto"
 		@drop.prevent="onDrop"
 		@dragover.prevent
 	>

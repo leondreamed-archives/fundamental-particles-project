@@ -69,10 +69,3 @@ export function checkAnswers(this: AppActionThis) {
 export function reset(this: AppActionThis) {
 	this.$state = createAppState();
 }
-
-export async function shootConfetti(this: AppActionThis) {
-	await this.createConfetti?.({
-		particleCount: 100,
-		spread: 160,
-	});
-}
