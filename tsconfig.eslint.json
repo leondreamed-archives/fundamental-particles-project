@@ -2,6 +2,7 @@
 	"extends": "./tsconfig.json",
 	"include": [
 		"./src",
+		"./scripts",
 		"windi.config.ts",
 		"vite.config.ts",
 		"jest.config.js",

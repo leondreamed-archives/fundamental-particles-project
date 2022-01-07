@@ -1,3 +1,5 @@
 import { execaCommandSync } from 'execa';
 
-execaCommandSync('pnpm run tc', { stdio: 'inherit' });
+if (execaCommandSync('git branch --show-current').stdout === 'main') {
+	execaCommandSync('pnpm run tc', { stdio: 'inherit' });
+}
