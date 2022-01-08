@@ -5,7 +5,8 @@ import { fundamentalParticleIds } from '~/utils/particles';
 export function createAppState(): AppStoreState {
 	return {
 		hardMode: false,
-		createConfetti: undefined,
+		secondsElapsed: 0,
+		timer: undefined,
 		isComplete: false,
 		highlightErrors: false,
 		particleAnswerGrid: orderedParticleAnswerGrid,

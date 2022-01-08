@@ -23,7 +23,7 @@ const answerParticleInfo = computed(() =>
 );
 
 const emptyContainerClasses: Record<
-	ParticleType,
+	ParticleType | 'higgs',
 	{ bg: string; border: string }
 > = {
 	boson: {
@@ -38,22 +38,30 @@ const emptyContainerClasses: Record<
 		bg: 'bg-purple-50',
 		border: 'border-purple-50',
 	},
+	higgs: {
+		bg: 'bg-yellow-50',
+		border: 'border-yellow-50',
+	},
 };
 const occupiedContainerClasses: Record<
-	ParticleType,
+	ParticleType | 'higgs',
 	{ bg: string; border: string }
 > = {
 	boson: {
-		bg: 'bg-orange-50',
+		bg: 'bg-orange-100',
 		border: 'border-orange-200',
 	},
 	lepton: {
-		bg: 'bg-cyan-50',
+		bg: 'bg-cyan-100',
 		border: 'border-cyan-200',
 	},
 	quark: {
-		bg: 'bg-purple-50',
+		bg: 'bg-purple-100',
 		border: 'border-purple-200',
+	},
+	higgs: {
+		bg: 'bg-yellow-100',
+		border: 'border-yellow-200',
 	},
 };
 
@@ -69,8 +77,8 @@ const particleContainerClasses = computed(() => {
 	// If the cell is empty
 	if (props.currentParticleId === undefined) {
 		if (answerParticleIds.value.includes('higgsBoson')) {
-			borderClass = 'border-yellow-100';
-			bgClass = 'bg-yellow-50';
+			borderClass = emptyContainerClasses.higgs.border;
+			bgClass = emptyContainerClasses.higgs.bg;
 		} else {
 			const { bg, border } =
 				emptyContainerClasses[answerParticleInfo.value.type];
@@ -82,8 +90,8 @@ const particleContainerClasses = computed(() => {
 	else {
 		// eslint-disable-next-line no-lonely-if
 		if (answerParticleIds.value.includes('higgsBoson')) {
-			bgClass = 'bg-yellow-100';
-			borderClass = 'bg-yellow-100';
+			bgClass = occupiedContainerClasses.higgs.bg;
+			borderClass = occupiedContainerClasses.higgs.border;
 		} else {
 			const { bg, border } =
 				occupiedContainerClasses[answerParticleInfo.value.type];

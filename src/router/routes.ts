@@ -1,8 +1,12 @@
 import type { RouteRecordRaw } from 'vue-router';
 
-export const router: RouteRecordRaw[] = [
+export const routes: RouteRecordRaw[] = [
 	{
 		path: '/',
-	
-	}
-]
+		component: async () => import('~/pages/menu-page.vue'),
+	},
+	{
+		path: '/game',
+		component: async () => import('~/pages/game-page.vue'),
+	},
+];

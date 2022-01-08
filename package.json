@@ -21,17 +21,22 @@
 		"tc": "vue-tsc --noEmit"
 	},
 	"dependencies": {
+		"@leonzalion/mdi-vue": "^3.0.12",
+		"@mdi/js": "^6.5.95",
 		"array-shuffle": "^3.0.0",
 		"canvas-confetti": "^1.4.0",
 		"map-obj": "^5.0.0",
+		"mdi-vue": "^3.0.12",
 		"pinia": "^2.0.0-rc.10",
+		"pretty-ms": "^7.0.1",
+		"simple-vue-icon": "^1.1.7",
 		"vue": "^3.2.25",
 		"vue-router": "^4.0.12"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^15.0.0",
 		"@commitlint/config-conventional": "^15.0.0",
-		"@leonzalion/eslint-config": "^1.0.47",
+		"@leonzalion/eslint-config": "^1.0.50",
 		"@leonzalion/markdownlint-config": "latest",
 		"@leonzalion/prettier-config": "latest",
 		"@leonzalion/tsconfig": "latest",

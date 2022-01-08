@@ -3,10 +3,12 @@ lockfileVersion: 5.3
 specifiers:
   '@commitlint/cli': ^15.0.0
   '@commitlint/config-conventional': ^15.0.0
-  '@leonzalion/eslint-config': ^1.0.47
+  '@leonzalion/eslint-config': ^1.0.50
   '@leonzalion/markdownlint-config': latest
+  '@leonzalion/mdi-vue': ^3.0.12
   '@leonzalion/prettier-config': latest
   '@leonzalion/tsconfig': latest
+  '@mdi/js': ^6.5.95
   '@types/canvas-confetti': ^1.4.2
   '@types/jest': ^27.0.3
   '@types/node': ^17.0.0
@@ -19,11 +21,14 @@ specifiers:
   jest: ^27.4.5
   lint-staged: ^12.1.3
   map-obj: ^5.0.0
+  mdi-vue: ^3.0.12
   pinia: ^2.0.0-rc.10
   postcss: ^8.4.5
   prettier: ^2.5.1
+  pretty-ms: ^7.0.1
   rimraf: ^3.0.2
   simple-git-hooks: ^2.7.0
+  simple-vue-icon: ^1.1.7
   tailwindcss: ^3.0.11
   ts-jest: ^27.1.2
   ts-node: ^10.4.0
@@ -36,20 +41,25 @@ specifiers:
   vue-tsc: ^0.30.2
 
 dependencies:
+  '@leonzalion/mdi-vue': 3.0.12_vue@3.2.26
+  '@mdi/js': 6.5.95
   array-shuffle: 3.0.0
   canvas-confetti: 1.4.0
   map-obj: 5.0.0
+  mdi-vue: 3.0.12_vue@3.2.26
   pinia: 2.0.0-rc.10_typescript@4.5.4+vue@3.2.26
+  pretty-ms: 7.0.1
+  simple-vue-icon: 1.1.7_vue@3.2.26
   vue: 3.2.26
   vue-router: 4.0.12_vue@3.2.26
 
 devDependencies:
   '@commitlint/cli': 15.0.0
   '@commitlint/config-conventional': 15.0.0
-  '@leonzalion/eslint-config': 1.0.47_eslint@8.6.0+typescript@4.5.4
+  '@leonzalion/eslint-config': 1.0.50_eslint@8.6.0+typescript@4.5.4
   '@leonzalion/markdownlint-config': 1.0.0
   '@leonzalion/prettier-config': 1.0.2_prettier@2.5.1
-  '@leonzalion/tsconfig': 1.0.10_faf01e1d5a40372a98081522dcafc186
+  '@leonzalion/tsconfig': 1.0.11_faf01e1d5a40372a98081522dcafc186
   '@types/canvas-confetti': 1.4.2
   '@types/jest': 27.4.0
   '@types/node': 17.0.8
@@ -837,8 +847,8 @@ packages:
       chalk: 4.1.2
     dev: true
 
-  /@leonzalion/eslint-config/1.0.47_eslint@8.6.0+typescript@4.5.4:
-    resolution: {integrity: sha512-jw0UE7W4IMSukFhqwhX7zcJNVuztfbEOuIxaksbmk+i2Pmooq9XdrDoy/P/LJ6zMwtu8RL/sQJNgjkwj/S8wLA==}
+  /@leonzalion/eslint-config/1.0.50_eslint@8.6.0+typescript@4.5.4:
+    resolution: {integrity: sha512-hhY+Bu+A/2Y+tWg6eCHzu1U16fMvG3v6aJNWk9GE/tk3fZ5pX+7feXKRSj64+yIRn1aOUnQikdDKea33xa5B/g==}
     peerDependencies:
       eslint: ^8.4.0
     dependencies:
@@ -870,6 +880,15 @@ packages:
     resolution: {integrity: sha512-P2GjH06nMJ78951REqEzHljCuvp+Yz+yomHZ5Fo3kYbWVhZLOBMLCbLVZPd3sqeh1fus4z0cKNsrbqQy+oxQmA==}
     dev: true
 
+  /@leonzalion/mdi-vue/3.0.12_vue@3.2.26:
+    resolution: {integrity: sha512-j6pAgrFT1E2fj5Ni3Ucn7PEAju1Us1IdoyJKKYwiC5mrTUb2N1wEWE1tTLT1CcJdkx06a5tZcfyNsj73MhQ0cQ==}
+    peerDependencies:
+      vue: '*'
+    dependencies:
+      '@mdi/js': 6.5.95
+      vue: 3.2.26
+    dev: false
+
   /@leonzalion/prettier-config/1.0.2_prettier@2.5.1:
     resolution: {integrity: sha512-R34NNyP4YnuNXq/roRcre6rhaoNJ906sHjuDwcD8WueUvPy1+i3Pc+/uW0Vpb57uE4QlBee15puhwo4KCiNQGw==}
     dependencies:
@@ -878,8 +897,8 @@ packages:
       - prettier
     dev: true
 
-  /@leonzalion/tsconfig/1.0.10_faf01e1d5a40372a98081522dcafc186:
-    resolution: {integrity: sha512-pta7VWSmY6BvYg7yLKdB58EqVEMqbB3da5A0Rj0WqMvhugD9lDemazeJlQB6YZlgU1+a8jMs1TMrlPyiMaMZ+g==}
+  /@leonzalion/tsconfig/1.0.11_faf01e1d5a40372a98081522dcafc186:
+    resolution: {integrity: sha512-nQUDiTqFuEFAVSBLtTR8mOXIwhS3dey3CBs50w/iibp2rvEhEwkarPT37CCBZIw/f5y4T8ZXySoQ5yi3Zd4Mdg==}
     dependencies:
       ts-node: 10.4.0_faf01e1d5a40372a98081522dcafc186
       tsconfig-paths: 3.12.0
@@ -889,6 +908,10 @@ packages:
       - '@types/node'
       - typescript
     dev: true
+
+  /@mdi/js/6.5.95:
+    resolution: {integrity: sha512-x/bwEoAGP+Mo10Dfk5audNIPi7Yz8ZBrILcbXLW3ShOI/njpgodzpgpC2WYK3D2ZSC392peRRemIFb/JsyzzYQ==}
+    dev: false
 
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -4669,6 +4692,15 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: false
 
+  /mdi-vue/3.0.12_vue@3.2.26:
+    resolution: {integrity: sha512-rc4rq99Hafa7v1u3KyfzGRr13v7/AzBvNrcXdhcgPQvj8wYafimbLGfNvQcGiAYZMow40KpXlZuG07132XccKw==}
+    peerDependencies:
+      vue: '*'
+    dependencies:
+      '@mdi/js': 6.5.95
+      vue: 3.2.26
+    dev: false
+
   /memory-fs/0.2.0:
     resolution: {integrity: sha1-8rslNovBIeORwlIN6Slpyu4KApA=}
     dev: true
@@ -5065,6 +5097,11 @@ packages:
       lines-and-columns: 1.2.4
     dev: true
 
+  /parse-ms/2.1.0:
+    resolution: {integrity: sha512-kHt7kzLoS9VBZfUsiKjv43mr91ea+U05EyKkEtqp7vNbHxmaVuEqN7XxeEVnGrMtYOAxGrDElSi96K7EgO1zCA==}
+    engines: {node: '>=6'}
+    dev: false
+
   /parse-passwd/1.0.0:
     resolution: {integrity: sha1-bVuTSkVpk7I9N/QKOC1vFmao5cY=}
     engines: {node: '>=0.10.0'}
@@ -5255,6 +5292,13 @@ packages:
       ansi-styles: 5.2.0
       react-is: 17.0.2
     dev: true
+
+  /pretty-ms/7.0.1:
+    resolution: {integrity: sha512-973driJZvxiGOQ5ONsFhOF/DtzPMOMtgC11kCpUrPGMTgqp2q/1gwzCquocrN33is0VZ5GFHXZYMM9l6h67v2Q==}
+    engines: {node: '>=10'}
+    dependencies:
+      parse-ms: 2.1.0
+    dev: false
 
   /progress/2.0.3:
     resolution: {integrity: sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==}
@@ -5663,6 +5707,14 @@ packages:
     hasBin: true
     requiresBuild: true
     dev: true
+
+  /simple-vue-icon/1.1.7_vue@3.2.26:
+    resolution: {integrity: sha512-Guh9fdWhVog12/vsnOynfL2n1HG2eEdgQFHOHV1f+ezK+gNpTbw+ILft2CNixbd+xXt4OvyebZlzvqim69vPhg==}
+    peerDependencies:
+      vue: ^3
+    dependencies:
+      vue: 3.2.26
+    dev: false
 
   /sisteransi/1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}

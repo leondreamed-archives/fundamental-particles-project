@@ -1,4 +1,3 @@
-import type { CreateTypes } from 'canvas-confetti';
 import type * as appActions from './actions';
 import type * as appGetters from './getters';
 import type {
@@ -10,7 +9,8 @@ import type { ActionThis, GetterThis, RawStore } from '~/types/store';
 
 export type AppStoreState = {
 	hardMode: boolean;
-	createConfetti: undefined | CreateTypes;
+	secondsElapsed: number;
+	timer: NodeJS.Timer | undefined;
 	isComplete: boolean;
 	highlightErrors: boolean;
 	particleGrid: ParticleGrid;

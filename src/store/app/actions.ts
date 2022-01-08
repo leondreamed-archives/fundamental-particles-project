@@ -85,10 +85,35 @@ export function checkAnswers(this: AppActionThis) {
 		}
 	}
 
+	this.stopTimer();
 	this.isComplete = true;
 	return true;
 }
 
-export function reset(this: AppActionThis) {
+export function startGame(this: AppActionThis) {
+	this.startTimer();
+}
+
+export function resetGame(this: AppActionThis) {
+	this.clearTimer();
 	this.$state = createAppState();
+	this.startTimer();
+}
+
+export function startTimer(this: AppActionThis) {
+	if (this.timer === undefined) {
+		this.timer = setInterval(() => {
+			this.secondsElapsed += 1;
+		}, 1000);
+	}
+}
+
+export function stopTimer(this: AppActionThis) {
+	if (this.timer !== undefined) clearInterval(this.timer);
+}
+
+export function clearTimer(this: AppActionThis) {
+	this.stopTimer();
+	this.secondsElapsed = 0;
+	this.startTimer();
 }
