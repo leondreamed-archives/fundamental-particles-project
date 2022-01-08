@@ -6,8 +6,8 @@
 		<div class="text-lg text-center my-5">
 			<span class="font-bold">Instructions: </span>
 			<span>
-				Drag the fundamental particles from the dock to the grid cell with the
-				correct information!
+				Drag the fundamental particles to the grid cell with the correct
+				information!
 			</span>
 		</div>
 		<div

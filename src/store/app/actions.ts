@@ -115,5 +115,4 @@ export function stopTimer(this: AppActionThis) {
 export function clearTimer(this: AppActionThis) {
 	this.stopTimer();
 	this.secondsElapsed = 0;
-	this.startTimer();
 }
