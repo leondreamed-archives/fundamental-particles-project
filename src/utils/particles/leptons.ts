@@ -4,19 +4,19 @@ import { particleMassString as m } from './mass';
 export const leptons = defineParticles('lepton', {
 	electron: {
 		name: 'electron',
-		mass: m({ mass: 0.511, unit: 'MeV' }),
+		mass: m({ mass: 0.511, unit: 'MeV', approx: true }),
 		charge: '-1',
 		spin: '1/2',
 	},
 	muon: {
 		name: 'muon',
-		mass: m({ mass: 0.511, unit: 'MeV' }),
+		mass: m({ mass: 0.511, unit: 'MeV', approx: true }),
 		charge: '-1',
 		spin: '1/2',
 	},
 	tau: {
 		name: 'tau',
-		mass: m({ mass: 1.777, unit: 'GeV' }),
+		mass: m({ mass: 1.777, unit: 'GeV', approx: true }),
 		charge: '-1',
 		spin: '1/2',
 	},

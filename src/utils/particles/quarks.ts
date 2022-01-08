@@ -6,7 +6,7 @@ export const quarks = defineParticles('quark', {
 		name: 'up',
 		charge: '2/3',
 		spin: '1/2',
-		mass: m({ mass: 2.3, approx: true, unit: 'MeV' }),
+		mass: m({ mass: 2.3, unit: 'MeV', approx: true }),
 	},
 	down: {
 		name: 'down',
