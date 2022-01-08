@@ -2,12 +2,7 @@
 <html>
 	<head>
 		<script>
-			const l = window.location;
-			const projectPages = true; // If you're using the base .github.io domain (e.g. leonzalion.github.io), set this to false
-			const repo = projectPages ? '/' + l.pathname.split('/')[1] : '';
-
-			sessionStorage.redirect =
-				l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + repo;
+			sessionStorage.redirect = location.href;
 		</script>
 		<meta http-equiv="refresh" content="0;URL='/'" />
 	</head>
