@@ -1,5 +1,6 @@
 import arrayShuffle from 'array-shuffle';
 import chunk from 'lodash.chunk';
+import confetti from 'canvas-confetti';
 import type { AppActionThis } from './types';
 import { createAppState } from './state';
 import type { ParticleAnswerGrid, ParticleId } from '~/types/particles';
@@ -29,7 +30,6 @@ export function getAnswerParticleIds(
 ): ParticleId[] {
 	const particlesRow = this.particleAnswerGrid[row];
 	if (particlesRow === undefined) throw new Error(`Invalid row: ${row}`);
-
 	return [particlesRow[column]!].flat();
 }
 
@@ -67,20 +67,23 @@ export function unsetParticleGridCell(
 
 export function checkAnswers(this: AppActionThis) {
 	this.highlightErrors = true;
-	for (let rowIndex = 0; rowIndex < this.particleGrid.length; rowIndex += 1) {
-		const row = this.getRow(rowIndex);
-		for (let columnIndex = 0; columnIndex < row.length; columnIndex += 1) {
+	for (
+		let rowIndex = 0;
+		rowIndex < this.particleAnswerGrid.length;
+		rowIndex += 1
+	) {
+		const answerRow = this.particleAnswerGrid[rowIndex]!;
+		for (const [columnIndex, particleAnswers] of answerRow.entries()) {
+			const currentAnswers = [particleAnswers].flat();
 			const currentGridParticle = this.getParticleGridCell({
 				row: rowIndex,
 				column: columnIndex,
 			});
 			if (
 				currentGridParticle === undefined ||
-				!this.getAnswerParticleIds({
-					row: rowIndex,
-					column: columnIndex,
-				}).includes(currentGridParticle)
+				!currentAnswers.includes(currentGridParticle)
 			) {
+				console.log(currentGridParticle, currentAnswers);
 				return false;
 			}
 		}
@@ -105,6 +108,7 @@ export function clearGame(this: AppActionThis) {
 	this.clearTimer();
 	const newState = createAppState();
 
+	confetti.reset();
 	this.isComplete = false;
 	this.highlightErrors = false;
 	this.particleGrid = newState.particleGrid;
