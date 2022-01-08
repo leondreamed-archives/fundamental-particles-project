@@ -31,7 +31,7 @@
 		"nanoid": "^3.1.30",
 		"pinia": "^2.0.0-rc.10",
 		"pretty-ms": "^7.0.1",
-		"simple-vue-icon": "^1.1.7",
+		"simple-vue-icon": "^1.1.8",
 		"tw-elements": "^1.0.0-alpha4",
 		"vue": "^3.2.25",
 		"vue-router": "^4.0.12"

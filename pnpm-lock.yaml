@@ -31,7 +31,7 @@ specifiers:
   pretty-ms: ^7.0.1
   rimraf: ^3.0.2
   simple-git-hooks: ^2.7.0
-  simple-vue-icon: ^1.1.7
+  simple-vue-icon: ^1.1.8
   tailwindcss: ^3.0.11
   ts-jest: ^27.1.2
   ts-node: ^10.4.0
@@ -55,7 +55,7 @@ dependencies:
   nanoid: 3.1.30
   pinia: 2.0.0-rc.10_typescript@4.5.4+vue@3.2.26
   pretty-ms: 7.0.1
-  simple-vue-icon: 1.1.7_vue@3.2.26
+  simple-vue-icon: 1.1.8_vue@3.2.26
   tw-elements: 1.0.0-alpha4_f08ad34c79b115dea9ceb5dee374ff7b
   vue: 3.2.26
   vue-router: 4.0.12_vue@3.2.26
@@ -5716,8 +5716,8 @@ packages:
     requiresBuild: true
     dev: true
 
-  /simple-vue-icon/1.1.7_vue@3.2.26:
-    resolution: {integrity: sha512-Guh9fdWhVog12/vsnOynfL2n1HG2eEdgQFHOHV1f+ezK+gNpTbw+ILft2CNixbd+xXt4OvyebZlzvqim69vPhg==}
+  /simple-vue-icon/1.1.8_vue@3.2.26:
+    resolution: {integrity: sha512-nita2TYDwRe/AFci+O1SQIpEjkVUkaIaN6M+0k2TRjhTcTcO3ElnSufcLiuWhYSCr4nvRtWtXcuCmNqNL50Anw==}
     peerDependencies:
       vue: ^3
     dependencies:

@@ -12,7 +12,7 @@ const store = useAppStore();
 			to="/"
 			class="row cursor-pointer hover:text-gray-100 flex-1 mr-auto"
 		>
-			<v-icon class="mr-2" :data="mdiArrowLeft"></v-icon>
+			<v-icon class="mr-2" :path="mdiArrowLeft"></v-icon>
 			Back to Menu
 		</router-link>
 		<div class="flex-1 text-center text-xl">
