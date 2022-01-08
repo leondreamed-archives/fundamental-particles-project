@@ -101,7 +101,7 @@ export function startGame(this: AppActionThis) {
 	this.startTimer();
 }
 
-export function resetGame(this: AppActionThis) {
+export function clearGame(this: AppActionThis) {
 	this.clearTimer();
 	const newState = createAppState();
 
@@ -109,7 +109,10 @@ export function resetGame(this: AppActionThis) {
 	this.highlightErrors = false;
 	this.particleGrid = newState.particleGrid;
 	this.particleDock = newState.particleDock;
+}
 
+export function resetGame(this: AppActionThis) {
+	this.clearGame();
 	this.startTimer();
 }
 
@@ -122,7 +125,10 @@ export function startTimer(this: AppActionThis) {
 }
 
 export function stopTimer(this: AppActionThis) {
-	if (this.timer !== undefined) clearInterval(this.timer);
+	if (this.timer !== undefined) {
+		clearInterval(this.timer);
+		this.timer = undefined;
+	}
 }
 
 export function clearTimer(this: AppActionThis) {
