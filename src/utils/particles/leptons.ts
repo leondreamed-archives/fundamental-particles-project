@@ -10,19 +10,19 @@ export const leptons = defineParticles('lepton', {
 	},
 	muon: {
 		name: 'muon',
-		mass: m({ mass: 0.511, unit: 'MeV', approx: true }),
+		mass: m({ mass: 106, unit: 'MeV', approx: true }),
 		charge: '-1',
 		spin: '1/2',
 	},
 	tau: {
 		name: 'tau',
-		mass: m({ mass: 1.777, unit: 'GeV', approx: true }),
+		mass: m({ mass: 1.78, unit: 'GeV', approx: true }),
 		charge: '-1',
 		spin: '1/2',
 	},
 	electronNeutrino: {
 		name: 'electron neutrino',
-		mass: m({ mass: 2.2, unit: 'eV', lessThan: true }),
+		mass: m({ mass: '1.0', unit: 'eV', lessThan: true }),
 		charge: '0',
 		spin: '1/2',
 	},
@@ -34,7 +34,7 @@ export const leptons = defineParticles('lepton', {
 	},
 	tauNeutrino: {
 		name: 'tau neutrino',
-		mass: m({ mass: 15.5, unit: 'MeV', lessThan: true }),
+		mass: m({ mass: 18.2, unit: 'MeV', lessThan: true }),
 		charge: '0',
 		spin: '1/2',
 	},

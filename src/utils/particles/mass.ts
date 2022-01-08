@@ -1,5 +1,5 @@
 type ParticleMassStringOptions = {
-	mass: number;
+	mass: number | string;
 	approx?: boolean;
 	lessThan?: boolean;
 	unit: 'eV' | 'MeV' | 'GeV';

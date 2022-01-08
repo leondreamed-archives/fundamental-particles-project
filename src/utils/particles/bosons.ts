@@ -28,7 +28,7 @@ export const bosons = defineParticles('boson', {
 	},
 	higgsBoson: {
 		name: 'higgs',
-		mass: m({ mass: 126, unit: 'GeV', approx: true }),
+		mass: m({ mass: 125, unit: 'GeV', approx: true }),
 		charge: '0',
 		spin: '0',
 	},
