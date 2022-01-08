@@ -1,4 +1,5 @@
 import arrayShuffle from 'array-shuffle';
+import chunk from 'lodash.chunk';
 import type { AppActionThis } from './types';
 import { createAppState } from './state';
 import type { ParticleAnswerGrid, ParticleId } from '~/types/particles';
@@ -91,12 +92,24 @@ export function checkAnswers(this: AppActionThis) {
 }
 
 export function startGame(this: AppActionThis) {
+	// In hard mode, randomize the particleAnswerGrid
+	if (this.hardMode) {
+		const newOrder = arrayShuffle(orderedParticleAnswerGrid.flat(1));
+		this.particleAnswerGrid = chunk(newOrder, 5);
+	}
+
 	this.startTimer();
 }
 
 export function resetGame(this: AppActionThis) {
 	this.clearTimer();
-	this.$state = createAppState();
+	const newState = createAppState();
+
+	this.isComplete = false;
+	this.highlightErrors = false;
+	this.particleGrid = newState.particleGrid;
+	this.particleDock = newState.particleDock;
+
 	this.startTimer();
 }
 

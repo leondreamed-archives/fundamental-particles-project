@@ -65,8 +65,19 @@ const occupiedContainerClasses: Record<
 	},
 };
 
-const correctBorder = 'border-green-500';
-const errorBorder = 'border-red-500';
+const correctBorderClass = 'border-green-500';
+const errorBorderClass = 'border-red-500';
+
+const hardModeClasses = {
+	empty: {
+		border: 'bg-gray-50',
+		bg: 'bg-gray-50',
+	},
+	occupied: {
+		bg: 'bg-gray-200',
+		border: 'border-gray-300',
+	},
+};
 
 const particleContainerClasses = computed(() => {
 	const cursorClass =
@@ -76,7 +87,10 @@ const particleContainerClasses = computed(() => {
 
 	// If the cell is empty
 	if (props.currentParticleId === undefined) {
-		if (answerParticleIds.value.includes('higgsBoson')) {
+		if (store.hardMode) {
+			borderClass = hardModeClasses.empty.border;
+			bgClass = hardModeClasses.empty.bg;
+		} else if (answerParticleIds.value.includes('higgsBoson')) {
 			borderClass = emptyContainerClasses.higgs.border;
 			bgClass = emptyContainerClasses.higgs.bg;
 		} else {
@@ -88,8 +102,10 @@ const particleContainerClasses = computed(() => {
 	}
 	// If the cell is occupied
 	else {
-		// eslint-disable-next-line no-lonely-if
-		if (answerParticleIds.value.includes('higgsBoson')) {
+		if (store.hardMode) {
+			borderClass = hardModeClasses.occupied.border;
+			bgClass = hardModeClasses.occupied.bg;
+		} else if (answerParticleIds.value.includes('higgsBoson')) {
 			bgClass = occupiedContainerClasses.higgs.bg;
 			borderClass = occupiedContainerClasses.higgs.border;
 		} else {
@@ -102,12 +118,12 @@ const particleContainerClasses = computed(() => {
 
 	// Override border class if error
 	if (store.highlightErrors) {
-		if (props.currentParticleId === undefined) borderClass = errorBorder;
+		if (props.currentParticleId === undefined) borderClass = errorBorderClass;
 		borderClass =
 			props.currentParticleId !== undefined &&
 			answerParticleIds.value.includes(props.currentParticleId)
-				? correctBorder
-				: errorBorder;
+				? correctBorderClass
+				: errorBorderClass;
 	}
 
 	return `${cursorClass} ${borderClass} ${bgClass}`;

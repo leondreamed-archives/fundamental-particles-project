@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { watch } from 'vue';
+import { useRoute } from 'vue-router';
 import ParticleDock from '~/components/particle-dock.vue';
 import ParticleGrid from '~/components/particle-grid.vue';
 import { useAppStore } from '~/store/app';
@@ -7,6 +8,11 @@ import { createConfetti } from '~/utils/confetti';
 import GameHeader from '~/components/game-header.vue';
 
 const store = useAppStore();
+const route = useRoute();
+if (route.query.mode === 'hard') {
+	store.hardMode = true;
+}
+
 store.startGame();
 
 // Shoot confetti when the game is completed

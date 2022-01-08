@@ -31,18 +31,8 @@ export type ParticleDropData = {
 
 type P = ParticleId | undefined;
 // prettier-ignore
-export type ParticleGrid = [
-	[P, P, P, P, P],
-	[P, P, P, P],
-	[P, P, P, P],
-	[P, P, P, P]
-];
+export type ParticleGrid = P[][];
 
 type A = ParticleId | ParticleId[];
 // prettier-ignore
-export type ParticleAnswerGrid = [
-	[A, A, A, A, A],
-	[A, A, A, A],
-	[A, A, A, A],
-	[A, A, A, A]
-];
+export type ParticleAnswerGrid = A[][];
