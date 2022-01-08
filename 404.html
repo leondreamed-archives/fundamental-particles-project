@@ -1,9 +1,15 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<script>
-			sessionStorage.redirect = location.href;
-		</script>
-		<meta http-equiv="refresh" content="0;URL='/'" />
-	</head>
-</html>
+<script>
+	(function (l, projectPages) {
+		console.log('hi');
+		var repo = projectPages ? '/' + l.pathname.split('/')[1] : '';
+
+		/* redirect all 404 traffic to index.html */
+		function redirect() {
+			l.replace(
+				l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + repo
+			);
+		}
+
+		redirect();
+	})(window.location, window.projectPages || true);
+</script>
